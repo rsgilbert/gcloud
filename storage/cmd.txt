@@ -1,0 +1,26 @@
+// Create bucket
+gsutil -b on -l us-east1 gs://rsgilbert-tet-bkt/
+
+// Copy file to bucket 
+gsutil cp ./hi.txt gs://rsgilbert-tet-bkt
+gsutil cp ./cmd.txt gs://rsgilbert-tet-bkt2/cmds/cmd.txt
+
+// List contents of a bucket/folder
+gsutil ls gs://rsgilbert-tet-bkt2 
+gsutil ls -lh gs://rsgilbert-tet-bkt2/cmds2
+
+// Make bucket publicly accessible
+// A file will be available at: https://storage.googleapis.com/rsgilbert-tet-bkt2/cmds/cmd.txt
+gsutil iam ch allUsers:objectViewer gs://rsgilbert-tet-bkt2 
+
+// To remove public access 
+gsutil iam ch -d allUsers:objectViewer gs://rsgilbert-tet-bkt2
+
+// Delete object 
+gsutil rm gs://rsgilbert-tet-bkt2/cmds/cmd.txt 
+
+// Delete bucket 
+gsutil rm -r gs://rsgilbert-tet-bkt2
+
+
+
