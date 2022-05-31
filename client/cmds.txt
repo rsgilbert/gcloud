@@ -1,0 +1,29 @@
+// Create service account
+gcloud iam service-accounts create my-service-account 
+
+
+// See gcloud config settings 
+gcloud config list 
+
+
+// Grant roles to service account 
+// See: https://cloud.google.com/storage/docs/reference/libraries#create-service-account-gcloud
+gcloud projects add-iam-policy-binding bright-spanner-345017 --member="serviceAccount:my-service-account@bright-spanner-345017.iam.gserviceaccount.com" --role=roles/owner
+
+// Generate key file 
+gcloud iam service-accounts keys create my-service-account-key.json --iam-account=my-service-account@bright-spanner-345017.iam.gserviceaccount.com   
+
+// Provide authentication credentials to application code 
+export GOOGLE_APPLICATION_CREDENTIALS="./my-service-account-key.json"
+export GOOGLE_APPLICATION_CREDENTIALS="/Users/gilbert/Projects/gcloud/client/my-service-account-key.json"
+
+// generate signed url for viewing a file for 1 minute
+gsutil -d 1m ../my-service-account-key.json gs://rsgilbert-new-bkt-1/msg.txt 
+
+// Create a url for uploading a file 
+// step 1: authenticate with service account
+gcloud auth activate-service-account --key-file=./my-service-account-key.json 
+
+// setp 2: sign a url with method PUT 
+gsutil signurl -m PUT -d 3m -c text/plain -u gs://rsgilbert-new-bkt-1/textfiles/my-nice-info.txt
+
