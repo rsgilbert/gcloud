@@ -27,3 +27,18 @@ gcloud auth activate-service-account --key-file=./my-service-account-key.json
 // setp 2: sign a url with method PUT 
 gsutil signurl -m PUT -d 3m -c text/plain -u gs://rsgilbert-new-bkt-1/textfiles/my-nice-info.txt
 
+
+// List gcloud accounts 
+gcloud auth list 
+
+// Switch gcloud account 
+gcloud config set account gssenyonjo@gmail..com
+
+// Make bucket using a subdomain as name 
+gsutil mb gs://blog.passiongames.co 
+
+
+
+
+
+

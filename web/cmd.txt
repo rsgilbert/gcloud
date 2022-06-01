@@ -1,0 +1,25 @@
+// gsutil 
+
+// make bucket 
+gsutil mb gs://blog.passiongames.co      
+
+Copy file to cloud:
+gsutil cp index.html gs://blog.passiongames.co
+
+// share files. Make them readable to anyone on the public internet
+// index.html file will now be accessible at: https://storage.googleapis.com/blog.passiongames.co/index.html
+gsutil iam ch allUsers:objectViewer gs://blog.passiongames.co
+
+// Synchronize root folder to bucket root location
+gsutil rsync . gs://blog.passiongames.co
+
+// Set MainPageSuffix to index.html and NotFoundPage to 404.html
+gsutil web set -m index.html -e 404.html gs://blog.passiongames.co 
+
+// See web settings:
+gsutil web get gs://blog.passiongames.co 
+
+
+
+
+

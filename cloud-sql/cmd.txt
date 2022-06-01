@@ -1,0 +1,31 @@
+// Access cloud shell
+Visit: https://console.cloud.google.com/sql/instances?cloudshell=true&project=bright-spanner-345017
+
+
+// Enable Cloud SQL Admin API 
+gcloud services enable sqladmin.googleapis.com
+
+// Connect to cloud sql instance. The instance name is hello-mysql
+gcloud sql connect hello-mysql 
+
+// sql command to create a table 
+CREATE TABLE entries (guestName VARCHAR(255), content VARCHAR(255), entryID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY (entryID));
+
+// To connect using cloud proxy for mac. 
+// Download proxy 
+curl -o cloud_sql_proxy https://dl.google.com/cloudsql/cloud_sql_proxy.darwin.amd64
+
+// give permissions
+chmod +x ./cloud_sql_proxy
+
+// run cloud_sql_proxy
+// we use 3308 since port 3306 is being used by existing mysql installation
+./cloud_sql_proxy -instances=bright-spanner-345017:us-east1:hello-mysql=tcp:3308 
+
+// connect  using cloud sql proxy
+mysql -u root -p --host  127.0.0.1 --port 3308
+
+
+
+
+

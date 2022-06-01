@@ -1,0 +1,20 @@
+# App engine 
+
+// create app 
+gcloud app create 
+
+// Install gcloud components that include app engine extensions
+// for python
+gcloud components install app-engine-python
+
+// deploy app 
+gcloud app deploy 
+
+// see logs 
+gcloud app logs tail -s default 
+
+
+
+
+
+
